@@ -7,11 +7,21 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <div id="root"></div>
+    <div> Not using React here </div>
+    <div id="root">
+
+    </div>
     <script type="text/babel" data-type="module">
         import React from "https://esm.sh/react"
         import { createRoot } from "https://esm.sh/react-dom/client"
 
+        const root = document.getElementById("root");
+
+        function App() {
+            return <div>I am root</div>
+        }
+
+        createRoot(root).render(<App />)
     </script>
 </body>
 </html>
