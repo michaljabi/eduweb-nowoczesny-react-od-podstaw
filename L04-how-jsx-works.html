@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <script type="module">
+    <script type="text/babel" data-type="module">
 
 
         import React from "https://esm.sh/react@18.3.1"
         import { createRoot } from "https://esm.sh/react-dom@18.3.1/client"
 
-        createRoot(document.body).render(<div>hello<div/>)
+        const myDiv = <div className="test">hello { 30 + 30 + '!' } </div>
+
+        function MyComponent() {
+            return <p> Component :)  </p>
+        }
+
+        // JSX - JavaScript XML
+        createRoot(document.body).render(<MyComponent />);
     </script>
 </body>
 </html>
