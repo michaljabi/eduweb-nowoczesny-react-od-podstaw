@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"
+    >
+</head>
+<body>
+
+
+<script type="module">
+
+    import React from "https://esm.sh/react@18.3.1"
+    import { createRoot } from "https://esm.sh/react-dom@18.3.1/client"
+
+    const fruits = ["apples", "mangoes", "cherries"]
+
+    const container = React.createElement("main", { className: "container p-5" },
+        React.createElement("article", { className: "panel is-info" },
+            React.createElement("p", { className: "panel-heading" }, " List of Fruits "),
+            fruits.map(name =>  React.createElement("a", { className: "panel-block", onClick: () => alert(`You choose: ${name}`) }, name))
+        )
+    );
+
+    createRoot(document.body).render(container)
+
+</script>
+</body>
+</html>

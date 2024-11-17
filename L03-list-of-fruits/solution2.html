@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"
+    >
+</head>
+<body>
+
+
+<script>
+    const fruits = ["apples", "mangoes", "cherries"]
+
+    document.body.innerHTML =  `
+
+        <main class="container p-5">
+            <article class="panel is-info">
+                <p class="panel-heading"> List of Fruits </p>
+                ${
+                    fruits
+                    .map(name => `<a class="panel-block"> ${name} </a>`)
+                    .join('')
+                }
+            </article>
+        </main>
+    `
+</script>
+</body>
+</html>

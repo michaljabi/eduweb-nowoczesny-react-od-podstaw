@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"
+    >
+</head>
+<body>
+
+
+<script>
+    const fruits = ["apples", "mangoes", "cherries"]
+
+    const container = document.createElement('main');
+    container.className = 'container p-5';
+
+    const panel = document.createElement('article');
+    panel.className = 'panel is-info';
+
+    const panelHeading = document.createElement('p');
+    panelHeading.className = 'panel-heading';
+    panelHeading.innerText = 'List of Fruits'
+
+    const panelBlockElements = fruits
+        .map(name => {
+            const panelBlock = document.createElement('a');
+            panelBlock.className = 'panel-block'
+            panelBlock.innerText = name
+            panelBlock.addEventListener('click', () => {
+                alert('You choose: ' + name)
+            })
+            return panelBlock;
+        })
+
+    container.append(panel)
+
+    panel.append(
+        panelHeading,
+        ...panelBlockElements
+    )
+
+    document.body.append(container)
+</script>
+</body>
+</html>
