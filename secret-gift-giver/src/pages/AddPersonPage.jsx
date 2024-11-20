@@ -24,7 +24,7 @@ export function AddPersonPage() {
     return <PageLayout title="Add new person">
         <Formik
             validate={validate}
-            initialValues={{personName: ''}}
+            initialValues={{personName: '', email: ''}}
             onSubmit={handleSubmit}>
             {
                 formProps => (
