@@ -1,6 +1,7 @@
 import {PageLayout} from "../components/PageLayout.jsx";
 import {addPerson} from "../people.js";
 import {Formik} from "formik";
+import classNames from "classnames";
 
 export function AddPersonPage() {
 
@@ -9,8 +10,20 @@ export function AddPersonPage() {
         actions.resetForm();
     }
 
+    const validate = (values) => {
+        const errors = {};
+        if(!values.personName) {
+            errors.personName = 'Name is required';
+        }
+        if(values.personName && values.personName.length <= 2) {
+            errors.personName = 'Name need to be at least 2 characters long';
+        }
+        return errors;
+    }
+
     return <PageLayout title="Add new person">
         <Formik
+            validate={validate}
             initialValues={{personName: ''}}
             onSubmit={handleSubmit}>
             {
@@ -18,7 +31,7 @@ export function AddPersonPage() {
                     <form onSubmit={formProps.handleSubmit}>
                         <div className="field">
                             <p className="control">
-                                <input className="input"
+                                <input className={classNames("input", {"is-danger": formProps.errors.personName})}
                                        name="personName"
                                        placeholder="Name"
                                        onChange={formProps.handleChange}
@@ -26,9 +39,13 @@ export function AddPersonPage() {
                                        value={formProps.values.personName}
                                 />
                             </p>
+                            {
+                                formProps.errors.personName &&
+                                <p className="help is-danger">{formProps.errors.personName}</p>
+                            }
                         </div>
                         <div className="field">
-                            <p className="control is-flex is-justify-content-end" style={{ opacity: formProps.isValid ? 1 : 0.6}}>
+                            <p className="control is-flex is-justify-content-end" style={{ opacity: (formProps.isValid && formProps.dirty) ? 1 : 0.6}}>
                                 <button className="button is-info" type="submit">
                                     Add
                                 </button>
