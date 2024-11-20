@@ -9,6 +9,8 @@ function App() {
       alert(message)
   }
 
+  const selectedNames = ["Krysia"]
+
   return (
     <>
       <Header title={appTitle} subTitle="Exchange gifts with your colleagues" onAlert={showAlert}/>
