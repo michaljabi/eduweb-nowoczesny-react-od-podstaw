@@ -5,6 +5,7 @@ import {useState, useEffect} from "react";
 
 export function PeoplePage() {
 
+
     const [selectedNames, setSelectedNames] = useState([])
 
     function handleSelect(name) {
@@ -15,9 +16,12 @@ export function PeoplePage() {
     }
 
     // After 2 seconds select "John" by code.
+
     useEffect(() => {
         const timerId = setTimeout(() => {
-            setSelectedNames((sN) => [...sN, "John"])
+            setSelectedNames((sN) => {
+                return sN.length > 0 ? [...sN, "John"] : sN
+            })
         }, 2000)
         return () => {
             clearTimeout(timerId);
