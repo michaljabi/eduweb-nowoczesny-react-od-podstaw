@@ -1,10 +1,10 @@
-import { getPeople } from "../people.js";
 import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
 import {useState, useEffect} from "react";
 import {SearchBox} from "../components/SearchBox.jsx";
 import {Outlet, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+import {peopleService} from "../services/peopleService.js";
 
 PeoplePage.propTypes = {
     noOutlet: PropTypes.bool,
@@ -49,15 +49,16 @@ export function PeoplePage({noOutlet = false}) {
 
         (async() => {
             try {
-                setPeople( await getPeople());
-            } catch(e) {
+                const { data } = await peopleService.getPeople();
+                setPeople(data)
+            } catch (e) {
                 console.error(e);
             }
         })()
 
     }, [])
 
-    const filteredPeople = people.filter(name=> name.toLowerCase().includes(searchText.toLowerCase()));
+    const filteredPeople = people.filter(({name}) => name.toLowerCase().includes(searchText.toLowerCase()));
 
     return (
         <PageLayout title="List of People">
@@ -66,9 +67,9 @@ export function PeoplePage({noOutlet = false}) {
                     <SearchBox onSearch={(value) => setSearchText(value)}/>
                     <article className="panel is-info">
                         {
-                            filteredPeople.map(name =>
+                            filteredPeople.map(({id, name}) =>
                                 (
-                                    <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)}
+                                    <PanelBlock key={id} name={name} isSelected={selectedNames.includes(name)}
                                                 onSelect={() => handleSelect(name)}/>
                                 )
                             )
