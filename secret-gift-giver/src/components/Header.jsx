@@ -18,7 +18,7 @@ export function Header() {
                     <p className="subtitle p-1" style={ { backgroundColor: 'white', borderRadius: '5px' } }>Exchange gifts with your colleagues</p>
                 </div>
             </section>
-            <WhatWillBeRendered />
+            {/*<WhatWillBeRendered />*/}
         </>
     )
 }
