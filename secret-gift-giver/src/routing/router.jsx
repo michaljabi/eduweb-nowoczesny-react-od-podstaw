@@ -3,7 +3,8 @@ import App from "../App.jsx";
 import {PeoplePage} from "../pages/PeoplePage.jsx";
 import {ExchangePage} from "../pages/ExchangePage.jsx";
 import {PersonInfoPage} from "../pages/PersonInfoPage.jsx";
-import {PageLayout} from "../components/PageLayout.jsx";
+import {AddPersonPage} from "../pages/AddPersonPage.jsx";
+import {NotFoundPage} from "../pages/NotFoundPage.jsx";
 
 
 export const router = createBrowserRouter([
@@ -34,8 +35,12 @@ export const router = createBrowserRouter([
                element: <ExchangePage />,
            },
            {
+               path: "add-person",
+               element: <AddPersonPage />,
+           },
+           {
                path: "*",
-               element: <PageLayout title="Not found 404" />
+               element: <NotFoundPage />
            }
        ]
     }
