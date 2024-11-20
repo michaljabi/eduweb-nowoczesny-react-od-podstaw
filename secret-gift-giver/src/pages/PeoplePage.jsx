@@ -5,7 +5,6 @@ import {useState, useEffect} from "react";
 
 export function PeoplePage() {
 
-
     const [selectedNames, setSelectedNames] = useState([])
 
     function handleSelect(name) {
@@ -16,7 +15,6 @@ export function PeoplePage() {
     }
 
     // After 2 seconds select "John" by code.
-
     useEffect(() => {
         const timerId = setTimeout(() => {
             setSelectedNames((sN) => {
@@ -36,6 +34,14 @@ export function PeoplePage() {
 
     return (
         <PageLayout title="List of People">
+            <p className="control has-icons-left">
+                <input className="input is-info" type="text" placeholder="Search"
+                       onChange={
+                            (e) => console.log(e.target.value)
+                       }
+                />
+                <span className="icon is-left">🔎</span>
+            </p>
             <article className="panel is-info">
                 {
                     people.map(name =>

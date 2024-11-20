@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 PageLayout.propTypes = {
    title: PropTypes.string,
-   children: PropTypes.element.isRequired
+   children: PropTypes.node.isRequired
 }
 
 
