@@ -18,6 +18,11 @@ export function AddPersonPage() {
         if(values.personName && values.personName.length < 2) {
             errors.personName = 'Name need to be at least 2 characters long';
         }
+        if (!values.email) {
+            errors.email = 'email address is required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
         return errors;
     }
 
@@ -45,7 +50,24 @@ export function AddPersonPage() {
                             }
                         </div>
                         <div className="field">
-                            <p className="control is-flex is-justify-content-end" style={{ opacity: (formProps.isValid && formProps.dirty) ? 1 : 0.6}}>
+                            <p className="control">
+                                <input className={classNames("input", {"is-danger": formProps.errors.email})}
+                                       name="email"
+                                       type="email"
+                                       placeholder="e-mail address"
+                                       onChange={formProps.handleChange}
+                                       onBlur={formProps.handleBlur}
+                                       value={formProps.values.email}
+                                />
+                            </p>
+                            {
+                                formProps.errors.email &&
+                                <p className="help is-danger">{formProps.errors.email}</p>
+                            }
+                        </div>
+                        <div className="field">
+                            <p className="control is-flex is-justify-content-end"
+                               style={{opacity: (formProps.isValid && formProps.dirty) ? 1 : 0.6}}>
                                 <button className="button is-info" type="submit">
                                     Add
                                 </button>
