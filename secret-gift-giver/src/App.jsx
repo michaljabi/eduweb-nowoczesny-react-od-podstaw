@@ -1,5 +1,17 @@
-import {Header} from "./components/Header.jsx";
-import {people} from "./people.js";
+import { Header } from "./components/Header.jsx";
+import { people } from "./people.js";
+
+
+// eslint-disable-next-line react/prop-types
+function PanelBlock({name = '', isSelected = false}) {
+    if(isSelected) {
+        return <a className="panel-block is-active is-flex is-justify-content-space-between">
+            {name} <span>✅</span>
+        </a>;
+    }
+    return <a className="panel-block">{name} </a>;
+}
+
 
 function App() {
 
@@ -21,9 +33,7 @@ function App() {
                 {
                     people.map(name =>
                         (
-                            <a key={name} className="panel-block is-active">
-                                {name}
-                            </a>
+                            <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)} />
                         )
                     )
                 }
