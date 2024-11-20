@@ -3,7 +3,7 @@ import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
 import {useState, useEffect} from "react";
 import {SearchBox} from "../components/SearchBox.jsx";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 
 PeoplePage.propTypes = {
@@ -12,8 +12,13 @@ PeoplePage.propTypes = {
 
 export function PeoplePage({noOutlet = false}) {
 
+    const navigate = useNavigate();
     const [searchText, setSearchText] = useState('');
     const [selectedNames, setSelectedNames] = useState([])
+
+    function handleNavigation() {
+        navigate("/exchange", {state: selectedNames})
+    }
 
     function handleSelect(name) {
         if(selectedNames.includes(name)) {
@@ -25,9 +30,9 @@ export function PeoplePage({noOutlet = false}) {
     // After 2 seconds select "John" by code.
     useEffect(() => {
         const timerId = setTimeout(() => {
-            setSelectedNames((sN) => {
-                return sN.length > 0 ? [...sN, "John"] : sN
-            })
+            // setSelectedNames((sN) => {
+            //     return sN.length > 0 ? [...sN, "John"] : sN
+            // })
         }, 2000)
         return () => {
             clearTimeout(timerId);
@@ -56,6 +61,13 @@ export function PeoplePage({noOutlet = false}) {
                             )
                         }
                     </article>
+                    {
+                        selectedNames.length > 1
+                        &&
+                        <div className="is-flex is-justify-content-end">
+                            <button className="button is-info" onClick={handleNavigation}> Start party ({selectedNames.length})</button>
+                        </div>
+                    }
                 </div>
                 {!noOutlet && <div className="column">
                     <Outlet/>
