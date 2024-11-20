@@ -9,7 +9,7 @@ export const peopleService = {
     getPeople() {
        return axiosInstance.get('/people')
     },
-    addPerson() {
-
+    addPerson({name, email}) {
+        return axiosInstance.post('/people', {name, email})
     }
 }

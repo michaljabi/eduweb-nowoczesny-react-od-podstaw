@@ -1,13 +1,18 @@
 import {PageLayout} from "../components/PageLayout.jsx";
-import {addPerson} from "../people.js";
 import {Formik} from "formik";
 import classNames from "classnames";
+import {peopleService} from "../services/peopleService.js";
 
 export function AddPersonPage() {
 
-    function handleSubmit(values, actions) {
-        addPerson(values.personName)
-        actions.resetForm();
+    async function handleSubmit(values, actions) {
+        try {
+            const {personName: name, email} = values;
+            await peopleService.addPerson({name, email})
+            actions.resetForm();
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     const validate = (values) => {

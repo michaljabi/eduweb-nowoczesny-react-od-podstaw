@@ -5,14 +5,20 @@ import {SearchBox} from "../components/SearchBox.jsx";
 import {Outlet, useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
 import {peopleService} from "../services/peopleService.js";
+import classNames from "classnames";
 
 PeoplePage.propTypes = {
     noOutlet: PropTypes.bool,
 }
 
+const makeEmptyPerson = () => ({ name: ''})
+const SKELETON_VALUES = [makeEmptyPerson(), makeEmptyPerson(), makeEmptyPerson(), makeEmptyPerson()]
+
 export function PeoplePage({noOutlet = false}) {
 
-    const [people, setPeople] = useState([]);
+    const [people, setPeople] = useState(SKELETON_VALUES);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
     const [searchText, setSearchText] = useState('');
     const [selectedNames, setSelectedNames] = useState([])
@@ -48,11 +54,17 @@ export function PeoplePage({noOutlet = false}) {
     useEffect(() => {
 
         (async() => {
+            setErrorMessage("");
+            setIsLoading(true)
             try {
                 const { data } = await peopleService.getPeople();
                 setPeople(data)
             } catch (e) {
                 console.error(e);
+                setErrorMessage(e.message)
+                setPeople([])
+            } finally {
+                setIsLoading(false)
             }
         })()
 
@@ -64,8 +76,16 @@ export function PeoplePage({noOutlet = false}) {
         <PageLayout title="List of People">
             <div className="columns is-desktop">
                 <div className="column">
-                    <SearchBox onSearch={(value) => setSearchText(value)}/>
-                    <article className="panel is-info">
+                    {
+                        isLoading && <div className="notification is-info is-light">Loading people...</div>
+                    }
+                    {
+                        errorMessage && <div className="notification is-danger is-light">{errorMessage}</div>
+                    }
+                    {
+                        !isLoading && !errorMessage && <SearchBox onSearch={(value) => setSearchText(value)} />
+                    }
+                    <article className={classNames("panel is-info", {"is-skeleton": isLoading})}>
                         {
                             filteredPeople.map(({id, name}) =>
                                 (
