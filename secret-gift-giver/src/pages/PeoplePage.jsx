@@ -3,9 +3,14 @@ import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
 import {useState, useEffect} from "react";
 import {SearchBox} from "../components/SearchBox.jsx";
+import {Outlet} from "react-router-dom";
+import PropTypes from "prop-types";
 
+PeoplePage.propTypes = {
+    noOutlet: PropTypes.bool,
+}
 
-export function PeoplePage() {
+export function PeoplePage({noOutlet = false}) {
 
     const [searchText, setSearchText] = useState('');
     const [selectedNames, setSelectedNames] = useState([])
@@ -38,16 +43,25 @@ export function PeoplePage() {
 
     return (
         <PageLayout title="List of People">
-            <SearchBox onSearch={(value) => setSearchText(value)} />
-            <article className="panel is-info">
-                {
-                    filteredPeople.map(name =>
-                        (
-                            <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)} onSelect={() => handleSelect(name)}/>
-                        )
-                    )
+            <div className="columns is-desktop">
+                <div className="column">
+                    <SearchBox onSearch={(value) => setSearchText(value)}/>
+                    <article className="panel is-info">
+                        {
+                            filteredPeople.map(name =>
+                                (
+                                    <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)}
+                                                onSelect={() => handleSelect(name)}/>
+                                )
+                            )
+                        }
+                    </article>
+                </div>
+                {!noOutlet && <div className="column">
+                    <Outlet/>
+                </div>
                 }
-            </article>
+            </div>
         </PageLayout>
     )
 }

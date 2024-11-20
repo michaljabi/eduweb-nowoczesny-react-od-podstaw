@@ -13,7 +13,17 @@ export const router = createBrowserRouter([
        children: [
            {
                path: "",
+               element: <PeoplePage noOutlet />,
+           },
+           {
+               path: "people",
                element: <PeoplePage />,
+               children: [
+                   {
+                       path: ":personName",
+                       element: <PersonInfoPage />,
+                   }
+               ]
            },
            {
                path: "person/:personName",
