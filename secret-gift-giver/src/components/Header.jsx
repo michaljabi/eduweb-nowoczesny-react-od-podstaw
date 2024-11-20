@@ -9,3 +9,7 @@ export function Header() {
         </section>
     )
 }
+
+// JSX rules:
+// 1. use className instead of class !
+// 2.
