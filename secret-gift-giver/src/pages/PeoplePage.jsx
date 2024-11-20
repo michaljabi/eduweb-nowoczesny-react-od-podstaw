@@ -1,10 +1,18 @@
 import {people} from "../people.js";
 import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
+import {useState} from "react";
 
 export function PeoplePage() {
 
-    const selectedNames = ["Krysia"]
+    const [selectedNames, setSelectedNames] = useState([])
+
+    function handleSelect(name) {
+        if(selectedNames.includes(name)) {
+            return setSelectedNames(selectedNames.filter(n => n !== name))
+        }
+        setSelectedNames([...selectedNames, name])
+    }
 
     return (
         <PageLayout title="List of People">
@@ -12,7 +20,7 @@ export function PeoplePage() {
                 {
                     people.map(name =>
                         (
-                            <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)}/>
+                            <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)} onSelect={() => handleSelect(name)}/>
                         )
                     )
                 }

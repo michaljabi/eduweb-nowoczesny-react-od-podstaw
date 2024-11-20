@@ -23,11 +23,12 @@ function App() {
             <Navbar />
             <PeoplePage/>
         </main>
-        <SampleButton />
+        {/*<SampleButton />*/}
     </>
   )
 }
 
+// eslint-disable-next-line no-unused-vars
 function SampleButton() {
     const [count, setCount] = useState(0)
 
