@@ -26,4 +26,9 @@ function App() {
   )
 }
 
+function SampleButton() {
+    let count = 0;
+    return <button className="button">{count}</button>
+}
+
 export default App
