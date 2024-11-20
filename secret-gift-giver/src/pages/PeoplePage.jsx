@@ -1,4 +1,4 @@
-import {people} from "../people.js";
+import { getPeople } from "../people.js";
 import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
 import {useState, useEffect} from "react";
@@ -12,6 +12,7 @@ PeoplePage.propTypes = {
 
 export function PeoplePage({noOutlet = false}) {
 
+    const [people, setPeople] = useState([]);
     const navigate = useNavigate();
     const [searchText, setSearchText] = useState('');
     const [selectedNames, setSelectedNames] = useState([])
@@ -43,6 +44,18 @@ export function PeoplePage({noOutlet = false}) {
             setSelectedNames((sN) => [...sN, "Mark"])
         }, 3000)
     }, [])*/
+
+    useEffect(() => {
+
+        (async() => {
+            try {
+                setPeople( await getPeople());
+            } catch(e) {
+                console.error(e);
+            }
+        })()
+
+    }, [])
 
     const filteredPeople = people.filter(name=> name.toLowerCase().includes(searchText.toLowerCase()));
 
