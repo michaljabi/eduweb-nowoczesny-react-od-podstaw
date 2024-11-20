@@ -14,6 +14,8 @@ export function PeoplePage() {
         setSelectedNames([...selectedNames, name])
     }
 
+    // After 2 seconds select "John" by code.
+
     return (
         <PageLayout title="List of People">
             <article className="panel is-info">
