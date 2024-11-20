@@ -9,8 +9,8 @@ PanelBlock.propTypes = {
 }
 
 export function PanelBlock({name = '', isSelected = false, onSelect = () => {}}) {
-    return <a className={classNames("panel-block", {"is-active is-flex is-justify-content-space-between": isSelected})} onClick={onSelect}>
+    return <div className={classNames("panel-block", {"is-active is-flex is-justify-content-space-between": isSelected})} onClick={onSelect}>
         <Link to={`/people/${name}`}> { name } </Link>
         { isSelected && <span>✅</span> }
-    </a>;
+    </div>;
 }
