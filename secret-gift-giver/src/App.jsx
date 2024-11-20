@@ -1,15 +1,15 @@
+import classNames from 'classnames'
+
 import { Header } from "./components/Header.jsx";
 import { people } from "./people.js";
 
 
 // eslint-disable-next-line react/prop-types
 function PanelBlock({name = '', isSelected = false}) {
-    if(isSelected) {
-        return <a className="panel-block is-active is-flex is-justify-content-space-between">
-            {name} <span>✅</span>
-        </a>;
-    }
-    return <a className="panel-block">{name} </a>;
+    return <a className={classNames("panel-block", {"is-active is-flex is-justify-content-space-between": isSelected})}>
+        { name }
+        { isSelected && <span>✅</span> }
+    </a>;
 }
 
 

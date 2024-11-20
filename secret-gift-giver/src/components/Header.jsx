@@ -1,3 +1,7 @@
+
+import classNames from 'classnames'
+import classes from './Header.module.css'
+
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 function WhatWillBeRendered() {
@@ -18,9 +22,9 @@ export function Header({title = 'Header', subTitle = 'subtitle', onAlert = () =>
             <section className="hero is-info">
                 <div className="hero-body">
                     <p className="title" onClick={() => onAlert('hello from header')}>{title}</p>
-                    <p className="subtitle p-1" style={{backgroundColor: 'white', borderRadius: '5px' } } >
+                    <h3 className={classNames("subtitle p-1", classes.bgWhite)} style={{borderRadius: '5px'}}>
                         {subTitle}
-                    </p>
+                    </h3>
                 </div>
             </section>
             {/*<WhatWillBeRendered />*/}
