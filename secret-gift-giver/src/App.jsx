@@ -2,6 +2,7 @@ import { Header } from "./components/Header.jsx";
 import { PeoplePage } from "./pages/PeoplePage.jsx";
 import { Notification } from "./components/Notification.jsx";
 import { Navbar } from "./components/Navbar.jsx";
+import {useState} from "react";
 
 function App() {
 
@@ -22,13 +23,17 @@ function App() {
             <Navbar />
             <PeoplePage/>
         </main>
+        <SampleButton />
     </>
   )
 }
 
 function SampleButton() {
-    let count = 0;
-    return <button className="button">{count}</button>
+    const [count, setCount] = useState(0)
+
+    return <button className="button" onClick={() => {
+        setCount((c) => c + 1)
+    }}>{count}</button>
 }
 
 export default App
