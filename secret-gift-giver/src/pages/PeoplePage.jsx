@@ -2,9 +2,12 @@ import {people} from "../people.js";
 import {PageLayout} from "../components/PageLayout.jsx";
 import {PanelBlock} from "../components/PanelBlock.jsx";
 import {useState, useEffect} from "react";
+import {SearchBox} from "../components/SearchBox.jsx";
+
 
 export function PeoplePage() {
 
+    const [searchText, setSearchText] = useState('');
     const [selectedNames, setSelectedNames] = useState([])
 
     function handleSelect(name) {
@@ -31,20 +34,14 @@ export function PeoplePage() {
         }, 3000)
     }, [])*/
 
+    const filteredPeople = people.filter(name=> name.toLowerCase().includes(searchText.toLowerCase()));
 
     return (
         <PageLayout title="List of People">
-            <p className="control has-icons-left">
-                <input className="input is-info" type="text" placeholder="Search"
-                       onChange={
-                            (e) => console.log(e.target.value)
-                       }
-                />
-                <span className="icon is-left">🔎</span>
-            </p>
+            <SearchBox onSearch={(value) => setSearchText(value)} />
             <article className="panel is-info">
                 {
-                    people.map(name =>
+                    filteredPeople.map(name =>
                         (
                             <PanelBlock key={name} name={name} isSelected={selectedNames.includes(name)} onSelect={() => handleSelect(name)}/>
                         )
