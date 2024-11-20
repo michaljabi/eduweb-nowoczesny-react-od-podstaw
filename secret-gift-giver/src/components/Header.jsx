@@ -1,4 +1,5 @@
-
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 function WhatWillBeRendered() {
     return <>
         { true }
@@ -9,13 +10,17 @@ function WhatWillBeRendered() {
     </>
 }
 
-export function Header() {
+export function Header({title = 'Header', subTitle = 'subtitle', onAlert = () => {}}) {
+    // console.log(props);
+    // const {title = 'Header', subTitle = 'subtitle'} = props;
     return (
         <>
             <section className="hero is-info">
                 <div className="hero-body">
-                    <p className="title">Secret Gift Giver</p>
-                    <p className="subtitle p-1" style={ { backgroundColor: 'white', borderRadius: '5px' } }>Exchange gifts with your colleagues</p>
+                    <p className="title" onClick={() => onAlert('hello from header')}>{title}</p>
+                    <p className="subtitle p-1" style={{backgroundColor: 'white', borderRadius: '5px' } } >
+                        {subTitle}
+                    </p>
                 </div>
             </section>
             {/*<WhatWillBeRendered />*/}
