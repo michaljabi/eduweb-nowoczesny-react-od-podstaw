@@ -11,7 +11,7 @@ PeoplePage.propTypes = {
     noOutlet: PropTypes.bool,
 }
 
-const makeEmptyPerson = () => ({ name: ''})
+const makeEmptyPerson = () => ({ id: Math.random(), name: ''})
 const SKELETON_VALUES = [makeEmptyPerson(), makeEmptyPerson(), makeEmptyPerson(), makeEmptyPerson()]
 
 export function PeoplePage({noOutlet = false}) {
