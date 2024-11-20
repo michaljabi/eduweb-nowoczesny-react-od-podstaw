@@ -1,8 +1,8 @@
-import { Header } from "./components/Header.jsx";
-import { PeoplePage } from "./pages/PeoplePage.jsx";
-import { Notification } from "./components/Notification.jsx";
-import { Navbar } from "./components/Navbar.jsx";
+import {Header} from "./components/Header.jsx";
+import {Notification} from "./components/Notification.jsx";
+import {Navbar} from "./components/Navbar.jsx";
 import {useState} from "react";
+import {Outlet} from "react-router-dom";
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
                 Select people, shuffle, make the exchange party
             </Notification>
             <Navbar />
-            <PeoplePage/>
+            <Outlet />
         </main>
         {/*<SampleButton />*/}
     </>
