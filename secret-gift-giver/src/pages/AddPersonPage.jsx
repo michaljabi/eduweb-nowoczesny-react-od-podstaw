@@ -15,7 +15,7 @@ export function AddPersonPage() {
         if(!values.personName) {
             errors.personName = 'Name is required';
         }
-        if(values.personName && values.personName.length <= 2) {
+        if(values.personName && values.personName.length < 2) {
             errors.personName = 'Name need to be at least 2 characters long';
         }
         return errors;
